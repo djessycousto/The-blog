@@ -24,42 +24,6 @@ const userRouter = require("./router/userrouter");
 const postRouter = require("./router/postRouter");
 const nonApiRouter = require("./router/nonAPIRoute");
 
-//====> Test routes
-// app.get("/test", (req, res) => {
-//   try {
-//     res.render("index"); // Ensure "views/index.ejs" exists
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
-
-// app.get("/lol", (req, res) => {
-//   try {
-//     res.send("hello");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
-
-// app.get("/article/:postId/:userId", async (req, res) => {
-//   console.log("from non API insight-article ");
-//   try {
-//     // const { postId, userId } = req.params;
-//     // const post = await Post.findById({ _id: postId }).populate("user");
-
-//     // if (!post) {
-//     //   // Handle the case where the post is not found
-//     //   console.error("Post not found");
-//     //   return res.status(404).send("Post not found");
-//     // }
-
-//     res.render("insight");
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
-
 //######## Routers ########//
 app.use("/auth", authRouter);
 app.use("/users", userRouter);

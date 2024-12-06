@@ -1,35 +1,47 @@
+console.log("search");
 const mainDomContainer = document.querySelector(".main-post-container");
 const domContent = document.querySelector(".main-post-contents");
 const searchForm = document.querySelector("#search-form");
 const searchFormInput = document.querySelector("#search-form input");
 
+console.log("search");
+
 async function searchBlog() {
-  let searchIn = [];
+  try {
+    const fetchAllPosts = await fetch("/posts");
+    if (!fetchAllPosts.ok) throw new Error("Failed to fetch posts");
+    const result = await fetchAllPosts.json();
 
-  // fetch post and user
+    const posts = await Promise.all(
+      result.posts.map(async (post) => {
+        try {
+          const populatePost = await fetch(`/users/${post.user}`);
+          if (!populatePost.ok) throw new Error("Failed to fetch user data");
+          const userData = await populatePost.json();
 
-  const fetchAllPosts = await fetch("/posts");
-  const result = await fetchAllPosts.json();
-  const data = result.posts;
+          return {
+            ...post,
+            user: userData,
+          };
+        } catch (error) {
+          console.error(
+            `Error fetching user data for post ${post._id}:`,
+            error
+          );
+          return null; // Optionally filter out this post
+        }
+      })
+    );
 
-  //   console.log(data); // okay
-
-  const posts = await Promise.all(
-    data.map(async (post) => {
-      //populate user field to get user
-      const populatePost = await fetch(`/users/${post.user}`);
-      const userData = await populatePost.json();
-
-      return {
-        ...post,
-        user: userData,
-      };
-    })
-  );
-  return posts;
+    return posts.filter((post) => post !== null); // Filter out failed posts
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return []; // Return an empty array on error
+  }
 }
 
-searchForm.addEventListener("keyup", async () => {
+searchForm.addEventListener("keyup", async (e) => {
+  e.preventDefault();
   const value = searchFormInput.value.toLowerCase(); // Get search input value
   const newPostSearching = await searchBlog(); // Fetch posts
 
@@ -37,14 +49,17 @@ searchForm.addEventListener("keyup", async () => {
 
   if (value) {
     // Filter posts based on the input
-    filteredPosts = newPostSearching.filter((post) => {
+    const filteredPosts = newPostSearching.filter((post) => {
       const title = post.title.toLowerCase(); // Ensure case-insensitive comparison
       return title.startsWith(value); // Match titles starting with the input
     });
-    display(filteredPosts); // Display only matching posts
-  }
-  if (filteredPosts < 1) {
-    mainDomContainer.innerHTML = "Sorry we can't find the article requested ";
+
+    if (filteredPosts.length > 0) {
+      display(filteredPosts); // Display matching posts
+    } else {
+      mainDomContainer.innerHTML =
+        "<p>Sorry, we can't find the article requested.</p>";
+    }
   } else {
     // If input is empty, reset to all posts
     display(newPostSearching);
@@ -133,6 +148,3 @@ function display(posts) {
 }
 
 //
-
-// const test = fetchAllPosts();
-// console.log(test);
