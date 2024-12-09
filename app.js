@@ -23,7 +23,8 @@ const authRouter = require("./router/authRouter");
 const userRouter = require("./router/userrouter");
 const postRouter = require("./router/postRouter");
 const nonApiRouter = require("./router/nonAPIRoute");
-const commentRouter = require("./router/comment");
+const commentRouter = require("./router/commentRouter");
+
 // const notFound = require("./router/notFound");
 
 //######## Routers ########//

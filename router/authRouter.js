@@ -3,10 +3,6 @@ const router = express.Router();
 
 // import controller
 const { createUser, login, logout } = require("../controller/auth");
-const {
-  authenticateUser,
-  authenticateUserHasLogIn,
-} = require("../middleware/authentication");
 
 // ############## non - API ##########################
 router.get("/signup", (req, res) => {

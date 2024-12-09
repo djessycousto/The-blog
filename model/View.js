@@ -8,4 +8,4 @@ const viewSchema = new mongoose.Schema({
 
 viewSchema.index({ postId: 1, userId: 1 }, { index: true });
 
-module.exports = mongoose.model("view", viewSchema);
+module.exports = mongoose.model("View", viewSchema);

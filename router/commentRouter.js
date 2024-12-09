@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const {
+  authenticateUser,
+  authenticateUserHasLogIn,
+} = require("../middleware/authentication");
 
 const {
   newComment,
@@ -7,6 +11,8 @@ const {
   deleteComment,
 } = require("../controller/comment");
 
-router.route("/").post(newComment);
-router.route("/").post(allComment);
-router.route("/:id").post(deleteComment);
+router.route("/").post(authenticateUser, allComment);
+router.route("/:postId/comment").post(authenticateUser, newComment);
+router.route("/:postId/comment").post(authenticateUser, deleteComment);
+
+module.exports = router;
