@@ -30,7 +30,10 @@ const allPostsFromOneUser = async (req, res) => {
 
 const allPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find()
+      .populate("user", "name email") // Populate user details
+      .populate("likes", "userId timestamp"); // Populate likes details
+    console.log(posts, " from post");
     res.status(200).json({ Qt: posts.length, posts });
   } catch (error) {
     console.log(error);

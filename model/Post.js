@@ -24,10 +24,12 @@ const postSchema = new mongoose.Schema(
 
     // outside link
 
-    comments: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Comments",
-    },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comments",
+      },
+    ],
 
     postPicture: {
       type: String,
@@ -35,15 +37,19 @@ const postSchema = new mongoose.Schema(
     },
 
     // coming from view
-    views: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "View",
-    },
+    views: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "View",
+      },
+    ],
     // who will create
-    likes: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Likes",
-    },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Like",
+      },
+    ],
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

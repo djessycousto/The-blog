@@ -4,9 +4,9 @@ const domContent = document.querySelector(".main-post-contents");
 const searchForm = document.querySelector("#search-form");
 const searchFormInput = document.querySelector("#search-form input");
 
-console.log("search");
-
 async function searchBlog() {
+  mainDomContainer.innerHTML = `<h4>Loading...</h4>`;
+
   try {
     const fetchAllPosts = await fetch("/posts");
     if (!fetchAllPosts.ok) throw new Error("Failed to fetch posts");
