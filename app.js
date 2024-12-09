@@ -23,13 +23,17 @@ const authRouter = require("./router/authRouter");
 const userRouter = require("./router/userrouter");
 const postRouter = require("./router/postRouter");
 const nonApiRouter = require("./router/nonAPIRoute");
+const commentRouter = require("./router/comment");
+// const notFound = require("./router/notFound");
 
 //######## Routers ########//
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/", nonApiRouter);
+app.use("/", commentRouter);
 
+// app.use("/404")
 //######## Start connection ########//
 const port = process.env.Port || 8080;
 const start = async () => {
