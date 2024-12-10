@@ -17,6 +17,7 @@ const like = async (req, res) => {
       //     postId,
       //     { $inc: { Like: 1 } },
       //     { new: true }
+
       //   );
 
       const like = await Like.create({ postId: postId, userId: userId });

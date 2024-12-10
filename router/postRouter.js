@@ -43,11 +43,13 @@ router.route("/:postId/getViews").get(authenticateUser, getAllviews);
 // router.route("/view/:postId/:userId").get(authenticateUser, getAllviews);
 
 router.route("/").get(authenticateUser, allComment);
-router.route("/:postId/comment").post(authenticateUser, newComment);
-router.route("/:postId/comment").delete(authenticateUser, deleteComment);
 
 router.route("/edit/:id").patch(authenticateUser, editPost);
 router.route("/:id").delete(deletePost);
 router.route("/:id").get(singlePost); // add auth just a person that logged in can see the post
 
+router.route("/:postId/comment").post(authenticateUser, newComment);
+router
+  .route("/:postId/comment/:commentId")
+  .delete(authenticateUser, deleteComment);
 module.exports = router;
