@@ -5,20 +5,19 @@ const currentUrl = window.location.href;
 const pathSegments = new URL(currentUrl).pathname.split("/");
 
 // Find the indices of 'insight-article' and extract the two IDs
-const index = pathSegments.indexOf("insight-article");
+const index = pathSegments.indexOf("article");
 const postId = pathSegments[index + 1];
 const userId = pathSegments[index + 2];
-
+console.log(pathSegments);
+console.log(index);
 // Log the extracted IDs
 console.log("Post ID:", postId);
 console.log("User ID:", userId);
 
 async function view(postId, userId) {
-  const baseURL = "http://localhost:3000"; // Replace with your actual server URL
+  const baseURL = "http://localhost:8080"; // Replace with your actual server URL
 
-  const viewResponsecheck = await fetch(
-    `${baseURL}/posts/view/${postId}/${userId}`
-  );
+  const viewResponsecheck = await fetch(`${baseURL}/posts/${postId}/getViews`);
   const viewDatacheck = await viewResponsecheck.json();
 
   // show view
