@@ -36,7 +36,23 @@ const getAllviews = async (req, res) => {
     const { postId, userId } = req.params;
 
     // Check if the user has already viewed the post
-    const view = await View.find(); // get buy post
+    const view = await View.find({ postId }); // get buy post
+    console.log(view, "view debug");
+
+    res.status(200).json({ userView: view, numberOfView: view.length });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const getAllviewsForDisplay = async (req, res) => {
+  try {
+    const { postId, userId } = req.params;
+
+    // Check if the user has already viewed the post
+    const view = await View.find({}); // get buy post
+    console.log(view, "view debug");
 
     res.status(200).json({ userView: view, numberOfView: view.length });
   } catch (error) {
@@ -48,4 +64,5 @@ const getAllviews = async (req, res) => {
 module.exports = {
   view,
   getAllviews,
+  getAllviewsForDisplay,
 };

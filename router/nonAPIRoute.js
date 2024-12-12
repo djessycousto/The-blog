@@ -14,7 +14,7 @@ router.get("/home", async (req, res) => {
   // date
 
   try {
-    const posts = await Post.find({}).populate("user");
+    const posts = await Post.find({}).populate("user").populate("comments");
     console.log(posts, "/home");
     if (authenticateUser) {
       console.log("user is logged");
@@ -58,7 +58,9 @@ router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
   // console.log(req.user, "from non API insight-article ");
   try {
     const { postId, userId } = req.params;
-    const post = await Post.findById({ _id: postId }).populate("user");
+    const post = await Post.findById({ _id: postId })
+      .populate("user")
+      .populate("comments");
 
     if (!post) {
       // Handle the case where the post is not found

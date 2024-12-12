@@ -32,7 +32,15 @@ const allPosts = async (req, res) => {
   try {
     const posts = await Post.find()
       .populate("user", "name email") // Populate user details
-      .populate("likes", "userId timestamp"); // Populate likes details
+      .populate("likes", "userId timestamp") // Populate likes details
+      .populate({
+        path: "comments", // Populate the comments
+        populate: {
+          path: "commentAuthor", // Populate the userId field in comments (who authored the comment)
+          select: "content", // Specify which user fields to return
+        },
+      });
+    // Populate likes details
     console.log(posts, " from post");
     res.status(200).json({ Qt: posts.length, posts });
   } catch (error) {
@@ -48,6 +56,9 @@ const singlePost = async (req, res) => {
     const post = await Post.findOne({ _id: postId })
       .populate({
         path: "likes",
+      })
+      .populate({
+        path: "comments",
       })
       .exec(); // add view and comment
     // check if not product

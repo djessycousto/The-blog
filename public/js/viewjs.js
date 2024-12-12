@@ -8,8 +8,6 @@ const pathSegments = new URL(currentUrl).pathname.split("/");
 const index = pathSegments.indexOf("article");
 const postId = pathSegments[index + 1];
 const userId = pathSegments[index + 2];
-console.log(pathSegments);
-console.log(index);
 // Log the extracted IDs
 console.log("Post ID:", postId);
 console.log("User ID:", userId);

@@ -136,6 +136,7 @@
                                                 <% })%>
 
 
+
                             </div>
                             <div class="main-post-text">
                                 <p>
@@ -185,14 +186,19 @@
                                             <div class="main-btn-and-icon">
                                                 <!-- <a href="#" class="main-read-more-btn"> Read more </a> -->
                                                 <div class="likes-view-comments-number">
-                                                    <i class="fa-solid fa-eye"><span class="viewnum"> 0</span></i>
+                                                    <i class="fa-solid fa-eye"><span class="viewnum">
+                                                            <%=post.views.length%>
+                                                        </span></i>
                                                     <!-- <span>views: 0</span> -->
-                                                    <i class="fa-solid fa-comment"> <span class="commentspan"> 0</span>
+                                                    <i class="fa-solid fa-comment"> <span class="commentspan">
+                                                            <%=post.comments.length%>
+                                                        </span>
                                                     </i>
                                                     <!-- <a href="#" class="comment">comments: 0</a> -->
-                                                    <a href="#" class="likes"><i class="fa-solid fa-thumbs-up"><span
+                                                    <span class="likes"><i class="fa-solid fa-thumbs-up"><span
                                                                 class="likespan">
-                                                                0</span></i></a>
+                                                                <%=post.likes.length%>
+                                                            </span></i></span>
                                                 </div>
                                             </div>
                             </div>

@@ -49,6 +49,7 @@ router.route("/edit/:id").patch(authenticateUser, editPost);
 router.route("/:id").delete(deletePost);
 router.route("/:id").get(singlePost); // add auth just a person that logged in can see the post
 
+//comment
 router.route("/:postId/comment").post(authenticateUser, newComment);
 router
   .route("/:postId/comment/:commentId")
