@@ -9,8 +9,6 @@ const index = pathSegments.indexOf("article");
 const postId = pathSegments[index + 1];
 const userId = pathSegments[index + 2];
 // Log the extracted IDs
-console.log("Post ID:", postId);
-console.log("User ID:", userId);
 
 async function view(postId, userId) {
   const baseURL = "http://localhost:8080"; // Replace with your actual server URL

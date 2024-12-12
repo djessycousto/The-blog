@@ -7,8 +7,6 @@ import { navToggle } from "./main-js.js"; // working
 
 // navToggle();
 
-console.log("from index");
-
 // home page fetch and display
 // async function getAllPost() {
 //   const [postResponse, userResponse] = await Promise.all([

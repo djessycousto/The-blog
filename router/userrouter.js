@@ -21,9 +21,9 @@ const {
 // #####  API route
 
 router.route("/").get(allUsers); // more roles can be pass here this is invoke directly therefore we return a function
-router.route("/").get(allUsers); // more roles can be pass here this is invoke directly therefore we return a function
+// router.route("/").get(allUsers); // more roles can be pass here this is invoke directly therefore we return a function
 router.route("/dah/account").get(authenticateUser, showCurrentUser); // authenticateUser got the req.userinfo no need to query db
-router.route("/uploadUserPic/:id").post(pictureOfUser);
+router.route("/uploadUserPic/:id").post(pictureOfUser); // why???
 router
   .route("/updateUser/:id")
   .patch(authenticateUser, authorizePermissions("Admin", "User"), editUser);

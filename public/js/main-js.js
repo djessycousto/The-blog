@@ -1,7 +1,6 @@
 // toggle menu
 /////////////////////////////////////////// navBar toggle
 export function navToggle() {
-  console.log("from navtoogle 1");
   //   const menuToggle = document.querySelector(".hamb");
   document.addEventListener("click", (e) => {
     const el = e.target;

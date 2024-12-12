@@ -10,6 +10,10 @@ const router = express.Router();
 
 router.use(authenticateUserHasLogIn);
 // ##### non API #####
+
+router.get("/", async (req, res) => {
+  res.redirect("/home");
+});
 router.get("/home", async (req, res) => {
   // date
 
@@ -22,37 +26,15 @@ router.get("/home", async (req, res) => {
       res.render("index", { user: req.user, posts });
     } else {
       console.log("issue with logic");
-      // Redirect to login if not logged in
-      // res.redirect('/login');
+      res
+        .status(500)
+        .json({ message: "sorry an issue occured please try again later" });
     }
-
-    // res.render("index");
-    // res.render("index");
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
-
-// // Define the '/home' route
-// router.get("/home", async (req, res) => {
-//   try {
-//     // The middleware authenticateUserHasLogIn has already set req.user
-//     if (req.user) {
-//       // If req.user is available, user is logged in
-//       console.log("User is logged");
-//       console.log(req.user); // Print user details (set by middleware)
-//       res.render("index", { user: req.user }); // Render the page with user data
-//     } else {
-//       console.log("User not logged in");
-//       // res.redirect("/home"); // Redirect to login if no user is logged in
-//       res.render("index"); // Render the page with user data
-//     }
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
 
 router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
   // console.log(req.user, "from non API insight-article ");

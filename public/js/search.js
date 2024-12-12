@@ -1,4 +1,3 @@
-console.log("search");
 const mainDomContainer = document.querySelector(".main-post-container");
 const domContent = document.querySelector(".main-post-contents");
 const searchForm = document.querySelector("#search-form");

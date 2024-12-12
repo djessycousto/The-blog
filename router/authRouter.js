@@ -9,22 +9,9 @@ router.get("/signup", (req, res) => {
   res.render("registration");
 });
 
-//   router.get("/login", authenticateUserHasLogIn, (req, res) => {
-//     res.render("login");
-//   });
-
 router.get("/login", (req, res) => {
   res.render("login");
 });
-
-// router.get("/dash", authenticateUser, (req, res) => {
-//   if (!req.user) {
-//     console.log("sorry login first ");
-//   } else {
-//     console.log(req.user);
-//   }
-//   res.status(200).render("dash", {});
-// });
 
 router.route("/signin").post(createUser);
 router.route("/login").post(login);
