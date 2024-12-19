@@ -375,6 +375,7 @@ input[type="file"]::file-selector-button:active {
 }
 
 #postForm,
+#addForm,
 #editForm {
   width: 100%;
   display: flex;
@@ -384,6 +385,7 @@ input[type="file"]::file-selector-button:active {
 }
 
 #postForm input,
+#addForm input,
 #editForm input {
   width: 80%;
   padding: 12px;
@@ -394,6 +396,7 @@ input[type="file"]::file-selector-button:active {
 }
 
 #postForm textarea,
+#addForm textarea,
 #editForm textarea {
   width: 80%;
   height: 320px;
@@ -403,8 +406,8 @@ input[type="file"]::file-selector-button:active {
   font-size: 16px;
   resize: none;
 }
-#postForm #addpostBtn,
-#editForm #addpostBtn {
+#addForm #addPostBtn,
+#editForm #editPostBtn {
   padding: 12px 28px;
   background-color: black;
   color: white;

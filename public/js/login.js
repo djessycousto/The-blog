@@ -40,23 +40,27 @@ function login() {
         try {
           const response = await axios.post("/auth/login", formData);
           const { name, role, userId } = response.data.user;
-          // console.log(name, role, userId);
-          // console.log(response.data.user);
-          window.location.href = `/home`; // after add a dash btn
-          // redirect(`/auth/dash/${userId}`);
-          // Handle success, e.g., show a success message to the user
+          window.location.href = `/home`; // Redirect to home page on success
+          // You can also handle additional logic here if needed
         } catch (error) {
           console.error("Error:", error);
-          // Handle error, e.g., show an error message to the user
+          // Show a more detailed error message
+          if (Error.response) {
+            // If the error is from the server, display the server's error message
+            messageDiv.textContent = Error.response.data.msg || "Login failed";
+          } else {
+            // If it's a network error or no response from the server
+            messageDiv.textContent = "Login failed. Please try again.";
+          }
         }
         // Do something with the data, e.g., update UI or redirect
         // console.log("Received data:", { email, password });// only for test
 
-        // if (response) {
-        //
+        // if (!response.ok) {
         // }
       } catch (error) {
         console.error("Error:", error);
+        messageDiv.textContent = error;
       }
     });
   });

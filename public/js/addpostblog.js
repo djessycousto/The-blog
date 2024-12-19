@@ -1,5 +1,3 @@
-console.log("test from add");
-
 ///############## ADD post  ########################
 const addPostBtn = document.getElementById("addForm");
 document.addEventListener("DOMContentLoaded", () => {

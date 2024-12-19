@@ -32,7 +32,8 @@ router.route("/").get(allPosts);
 router.route("/").post(authenticateUser, createPost);
 
 // like
-router.route("/:postId/likes").get(authenticateUser, getLike);
+// router.route("/:postId/likes").get(authenticateUser, getLike);
+router.route("/:postId/likes").get(getLike);
 router.route("/:postId/likes").post(authenticateUser, like);
 router.route("/:postId/unlikes").post(authenticateUser, unlike);
 

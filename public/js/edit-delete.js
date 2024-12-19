@@ -43,16 +43,14 @@ const displayData = (posts) => {
     return;
   }
   const rows = posts
-
     .map(
-      ({ _id: postId, user, title, post: blog, like, view, postPicture }) => `
+      ({ _id: postId, user, title, post: blog, likes, views, postPicture }) => `
+      
           <tr>
-            <td><img src="" alt="image placeholder"></td>
             <td>${user?.user?.role || "N/A"}</td>
             <td>${title}</td>
-            <td class="post-elipse">${blog}</td>
-            <td>${like}</td>
-            <td>${view}</td>
+            <td>${likes.length}</td>
+            <td>${views.length}</td>
             <td>
               <div class="btn-dash-container">
                 <a class="btn edit-btn" data-id="${postId}" href="#users/dah/account/edit/${postId}">Edit</a>

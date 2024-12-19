@@ -60,7 +60,7 @@ const chart = new Chart(ctx, {
 // nav\
 
 const menu = document.querySelector(".humb-menu");
-console.log(menu);
+
 // menu.addEventListener("click", function () {});
 
 function dashMenuToggle() {
@@ -95,7 +95,6 @@ dashMenuToggle();
 
 function logoutV1() {
   const logoutBtn = document.querySelector(".logout");
-  console.log(logoutBtn);
 
   logoutBtn.addEventListener("click", (e) => {
     e.preventDefault();
