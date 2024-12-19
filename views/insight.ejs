@@ -129,21 +129,19 @@
             <img src=" <%= post.user.userImage%>" alt="">
         </div>
         <div class="about-the-author-text">
-            <h4>About the author</h4>
-            <h5>
-                <strong>
+            <h2> <strong>
+                    <span> Author</span>`
                     <%= post.user.name%>
-                </strong>
+                </strong></h2>`
 
-            </h5>
             <p>
                 <%= post.user.aboutTheUser%>
                     </h5>
             </p>
             <div class="socials">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span><i class="fa-brands fa-facebook"></i></span>
+                <span><i class="fa-brands fa-x-twitter"></i></span>
+                <span><i class="fa-brands fa-linkedin"></i></span>
             </div>
         </div>
 
@@ -151,6 +149,8 @@
 
     <!-- related-topic -->
     <section class="related-topic" id="related-posts-container">
+
+        <h1>Related topic</h1>
         <a href="">
             <div class="related-topic-p.holeder">
                 <img src="" alt="">

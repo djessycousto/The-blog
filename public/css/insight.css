@@ -1,11 +1,3 @@
-/* reset the margin and border on insight page */
-/* .main-post-contents {
-  margin-bottom: unset;
-  border-bottom: none;
-} */
-
-/* about the author */
-
 .about-the-author {
   background-color: var(--btn-other-colors);
   display: flex;
@@ -33,6 +25,7 @@
   width: 60%;
   padding: 16px;
   margin-left: 32px;
+  color: white;
 }
 
 .about-the-author-text h4 {
@@ -52,8 +45,15 @@
 .about-the-author-text .socials span {
   width: 32px;
   height: 32px;
-  background-color: var(--primary-40);
+  align-items: center;
+  /* background-color: var(--primary-40); */
 }
+
+.about-the-author-text .socials span i {
+  font-size: 28px;
+  color: white;
+}
+
 /* related pages */
 .related-topic {
   width: 80%;

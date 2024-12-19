@@ -7,8 +7,6 @@ const path = require("path");
 // one attache user id //  is on cookie
 
 const createPost = async (req, res) => {
-  // req.body.user = req.user.userId => the first part came from authenticate userObjet i mean both
-  // console.log(req.body);
   try {
     req.body.user = req.user.userId;
     const post = await Post.create(req.body);
@@ -31,7 +29,8 @@ const allPostsFromOneUser = async (req, res) => {
 const allPosts = async (req, res) => {
   try {
     const posts = await Post.find()
-      .populate("user", "name email") // Populate user details
+      .select("-password")
+      .populate("user") // Populate user details
       .populate("likes", "userId timestamp") // Populate likes details
       .populate({
         path: "comments", // Populate the comments
@@ -41,7 +40,7 @@ const allPosts = async (req, res) => {
         },
       });
     // Populate likes details
-    console.log(posts, " from post");
+    // console.log(posts, " from post");
     res.status(200).json({ Qt: posts.length, posts });
   } catch (error) {
     console.log(error);

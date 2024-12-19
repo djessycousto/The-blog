@@ -6,7 +6,7 @@ const { attachCookiesToResponse, createTokenUser } = require("../utils");
 const createUser = async (req, res) => {
   try {
     // check for a unique email in controller
-    const { name, email, password } = req.body;
+    const { name, email, password, aboutTheUser } = req.body;
     const isEmailExist = await User.findOne({ email });
 
     if (isEmailExist) {
@@ -19,13 +19,23 @@ const createUser = async (req, res) => {
     // console.log("Document count:", await User.countDocuments({}));
     // console.log("isTheFirstDoc:", isTheFirstDoc);
     const role = isTheFirstDoc ? "Admin" : "User";
-    // console.log("Assigned role:", role);
 
-    const user = await User.create({ name, email, password, role });
+    const user = await User.create({
+      name,
+      email,
+      password,
+      role,
+      aboutTheUser,
+    });
 
     //===> create JWT <======///
 
-    const tokenUser = { name: user.name, userId: user._id, role: user.role };
+    const tokenUser = {
+      name: user.name,
+      userId: user._id,
+      role: user.role,
+      aboutTheUser: user.aboutTheUser,
+    };
     attachCookiesToResponse({ res, user: tokenUser });
 
     res.status(201).json({ user: tokenUser, msg: "User created" });

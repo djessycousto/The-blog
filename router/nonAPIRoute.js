@@ -10,7 +10,6 @@ const router = express.Router();
 
 router.use(authenticateUserHasLogIn);
 
-console.log(authenticateUser, "authenticatelogin");
 // ##### non API #####
 
 router.get("/", async (req, res) => {
@@ -41,18 +40,18 @@ router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
     const { postId } = req.params;
     const userId = req.user.userId;
 
-    console.log(userId, " user idddddddd");
     const post = await Post.findById({ _id: postId })
       .populate("user")
       .populate("comments");
+
+    const user = await User.find({ userId });
 
     if (!post) {
       // Handle the case where the post is not found
       console.error("Post not found");
       return res.status(404).send("Post not found");
     }
-    const user = req.user;
-    console.log(user);
+
     res.render("insight", { post, user });
   } catch (error) {
     console.error(error);

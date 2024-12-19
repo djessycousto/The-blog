@@ -15,7 +15,9 @@ const authenticateUser = async (req, res, next) => {
   try {
     // const payload = isTokenValid({ token }); valid option
     // console.log(payload, "payload");
-    const { name, userId, role, userImage } = isTokenValid({ token }); // coming from tokenUser
+    const { name, userId, role, userImage, aboutTheUser } = isTokenValid({
+      token,
+    }); // coming from tokenUser
     // req.user = { name, userId, role }; // req.user user here it is just a name (could have been name req.userInfo = { name, userId, role };)
     req.user = { name, userId, role, userImage };
     next();
@@ -33,9 +35,11 @@ const authenticateUserHasLogIn = async (req, res, next) => {
 
   if (token) {
     try {
-      const { name, userId, role } = isTokenValid({ token });
+      const { name, userId, role, userImage } = isTokenValid({
+        token,
+      });
       res.locals.isLoggedIn = true;
-      req.user = { name, userId, role };
+      req.user = { name, userId, role, userImage };
       next();
     } catch (error) {
       console.log(error);

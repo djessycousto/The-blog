@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.getElementById("userEmail");
     const password = document.getElementById("userPassword");
     const aboutTheUser = document.getElementById("aboutTheUser");
+    console.log(aboutTheUser, aboutTheUser.value);
     const userImageInput = document.getElementById("userImage");
     const userImage = userImageInput.files[0];
     const messageDiv = document.querySelector(".message");
@@ -56,7 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const userDetail = await userDetailResponse.json();
-      form.reset();
+      console.log(userDetail, "user detail ", userDetail.aboutTheUser);
+      // form.reset();
 
       const { userId } = userDetail.user;
 

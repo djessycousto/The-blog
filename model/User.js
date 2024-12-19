@@ -34,8 +34,12 @@ const UserSchema = new mongoose.Schema({
   aboutTheUser: {
     type: String,
     trim: true,
-    min: [20, "must have at least 20 character (FDB)"],
-    max: [500, "must have no more than 500 character (FDB)"],
+    // min: [20, "must have at least 20 character (FDB)"],
+    // max: [500, "must have no more than 500 character (FDB)"],
+  },
+
+  test: {
+    type: String,
   },
 
   role: {
