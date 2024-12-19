@@ -1,0 +1,143 @@
+<!--################### header ###################-->
+<%- include('./partials/header-nav'); %>
+
+
+
+    <!--################### hero ###################-->
+
+    <section class="hero">
+        <img src="/images/jakob-owens-eD3mggHwM5M-unsplash.jpg" alt="" />
+
+        <div class="inner-div">
+            <div class="hero-text-content">
+                <h1>Contact us</h1>
+                <p>let blog mind free and peace of discovering...</p>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .wrap {
+            width: 80%;
+            margin: auto;
+        }
+
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-section h2 {
+            color: #0056b3;
+        }
+
+        .contact-section p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact-section form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .contact-section label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .contact-section input,
+        .contact-section textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .contact-section button {
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .contact-section button:hover {
+            background-color: #003f7d;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+
+
+    <body>
+        <div class="wrap">
+
+
+            <section class="contact-section">
+                <div class="container">
+                    <h2>Get in Touch</h2>
+                    <p>If you have any questions or need assistance, feel free to reach out to us through the form below
+                        or
+                        by
+                        using the contact details provided.</p>
+                </div>
+
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+
+                <div class="container">
+                    <h3>Our Contact Information</h3>
+                    <p>Email: contact@yourcompany.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <p>Address: 1234 Street Name, City, Country</p>
+                </div>
+            </section>
+        </div>
+        <%- include('./partials/footer'); %>
