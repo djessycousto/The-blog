@@ -9,6 +9,8 @@ const express = require("express");
 const router = express.Router();
 
 router.use(authenticateUserHasLogIn);
+
+console.log(authenticateUser, "authenticatelogin");
 // ##### non API #####
 
 router.get("/", async (req, res) => {
@@ -19,10 +21,7 @@ router.get("/home", async (req, res) => {
 
   try {
     const posts = await Post.find({}).populate("user").populate("comments");
-    console.log(posts, "/home");
     if (authenticateUser) {
-      console.log("user is logged");
-      console.log(req.user, "from non API");
       res.render("index", { user: req.user, posts });
     } else {
       console.log("issue with logic");
@@ -57,16 +56,11 @@ router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
   }
 });
 
-router.get("/test", (req, res) => {
-  const testVar = "Hello, EJS!";
-  const urlR = "test url";
-  const x = "test x";
-  res.render("test", { testVar, x, urlR });
-});
-
-router.get("/about", (req, res) => {
+router.get("/about", async (req, res) => {
   try {
-    res.render("about");
+    if (authenticateUser) {
+      res.render("about", { user: req.user });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -74,7 +68,9 @@ router.get("/about", (req, res) => {
 });
 router.get("/contact", (req, res) => {
   try {
-    res.render("contact");
+    if (authenticateUser) {
+      res.render("contact", { user: req.user });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
