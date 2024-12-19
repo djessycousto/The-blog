@@ -10,34 +10,43 @@ const pathSegments = new URL(currentUrl).pathname.split("/");
 // Find the indices of 'insight-article' and extract the two IDs
 const index = pathSegments.indexOf("article");
 // const postId = pathSegments[index + 1];
-const userId = pathSegments[index + 2];
-
-// Log the extracted IDs
-// console.log("Post ID:", postId);
+// const userId = pathSegments[index + 2];
+const userId = document.getElementById("block-post").dataset.userid;
 
 // Get the postId from the dataset
 const postId = getPostId;
 
 const baseURL = "http://localhost:8080"; // Replace with your actual server URL
 
-// Function to fetch like count and update the display
-const fetchLikeDisplay = async () => {
+// fetch all posts
+
+const fetchPosts = async () => {
   try {
-    const likeResponse = await fetch(`${baseURL}/posts/${postId}/likes`);
-    if (!likeResponse.ok) throw new Error("Failed to fetch likes");
+    const response = await fetch(`/posts`);
 
-    // const { LikeNum } = await likeResponse.json();
-    const data = await likeResponse.json();
+    if (!response.ok) {
+      throw new Error("Failed to fetch posts ", Error);
+    }
 
-    console.log(data);
-    likespan.textContent = `${data.LikeNum}`; // Update the like count in the DOM
-    return data.LikeNum;
+    const data = await response.json();
+
+    const allPost = data.posts;
+
+    let postsLikes = allPost.map((post) => {
+      return post.likes.length;
+    });
+    likespan.textContent = `${
+      postsLikes.reduce((acc, likesCount) => acc + likesCount, 0) === 0
+        ? 0
+        : postsLikes.reduce((acc, likesCount) => acc + likesCount, 0)
+    }`;
   } catch (error) {
-    console.error("Error fetching likes:", error);
+    console.log(error);
   }
 };
 
-// Event listener for like button click
+fetchPosts();
+
 likespanbtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -48,9 +57,9 @@ likespanbtn.addEventListener("click", async (e) => {
 
     const { LikeNum, like } = await likeResponse.json();
     // const userHasLiked = LikeNum > 0;
-    const userHasLiked = like.some((like) => like.userId === userId); // Replace loggedInUserId appropriately
-    console.log(like, "likkkekeke");
-    console.log(userHasLiked, "hasliked");
+    const userHasLiked = like.some(
+      (like) => like.userId === userId && like.postId === postId
+    );
     // Send like or unlike based on current state
     const endpoint = userHasLiked ? "unlikes" : "likes";
     const response = await fetch(`${baseURL}/posts/${postId}/${endpoint}`, {
@@ -66,7 +75,8 @@ likespanbtn.addEventListener("click", async (e) => {
     );
 
     // Update the like count dynamically without reloading
-    await fetchLikeDisplay();
+    // await fetchLikeDisplay();
+    await fetchPosts();
   } catch (error) {
     console.error("Error handling like button:", error);
   }

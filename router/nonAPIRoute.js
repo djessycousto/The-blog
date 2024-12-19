@@ -38,7 +38,10 @@ router.get("/home", async (req, res) => {
 router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
   // console.log(req.user, "from non API insight-article ");
   try {
-    const { postId, userId } = req.params;
+    const { postId } = req.params;
+    const userId = req.user.userId;
+
+    console.log(userId, " user idddddddd");
     const post = await Post.findById({ _id: postId })
       .populate("user")
       .populate("comments");
@@ -49,6 +52,7 @@ router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
       return res.status(404).send("Post not found");
     }
     const user = req.user;
+    console.log(user);
     res.render("insight", { post, user });
   } catch (error) {
     console.error(error);

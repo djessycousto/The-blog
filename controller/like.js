@@ -115,13 +115,14 @@ const unlike = async (req, res) => {
       console.log(like, "like in unlike");
       const post = await Post.findByIdAndUpdate(
         postId,
-        { $pull: { like: like._id } },
+        { $pull: { likes: like._id } },
         { new: true }
       );
 
       // Remove the like record from the Like model
       const unLike = await Like.findOneAndDelete({ postId, userId });
 
+      console.log(unLike, "unliked");
       res.json({ unLike, msg: "unliked" });
     } else {
       // User hasn't liked the post, handle accordingly
