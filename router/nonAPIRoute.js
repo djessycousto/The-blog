@@ -46,7 +46,8 @@ router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
       .populate("user")
       .populate("comments");
 
-    const user = await User.findOne({ userId });
+    // const user = await User.findOne({ userId });
+    const user = await User.findById(userId);
 
     if (!post) {
       // Handle the case where the post is not found

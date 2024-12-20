@@ -2,8 +2,9 @@ const commentFunction = () => {
   // Get the current URL
 
   // Log the extracted IDs
-
-  function comment(postId, userId) {
+  const postId = document.querySelector(".main-post-text").dataset.id;
+  console.log(postId, "from comment post id");
+  function comment(postId) {
     const commentForm = document.getElementById("commentForm");
     const commentsContent = document.getElementById("comments");
     const commentBtn = document.getElementById("cbtn");
@@ -56,4 +57,4 @@ const commentFunction = () => {
   comment(postId);
 };
 
-// commentFunction();
+commentFunction();
