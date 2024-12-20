@@ -40,8 +40,8 @@ router.route("/:postId/unlikes").post(authenticateUser, unlike);
 //View
 router.route("/:postId/view").post(authenticateUser, view); // need to change to the one in bottom
 router.route("/:postId/getViews").get(authenticateUser, getAllviews);
-
 // router.route("/view/:postId/:userId").post(authenticateUser, view);
+
 // router.route("/view/:postId/:userId").get(authenticateUser, getAllviews);
 
 router.route("/").get(authenticateUser, allComment);

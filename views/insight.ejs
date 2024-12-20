@@ -49,8 +49,10 @@
                     <!-- <i class="fa-solid fa-user"></i> -->
 
 
-                    <div class="main-post-banner-details" id="block-post" data-userid=<%=user.userId%>>
+                    <div class="main-post-banner-details" id="block-post" data-userid="<%=post.user._id%>">
                         <h4>
+
+
                             <%= post.title%>
                         </h4>
                         <div class="main-top-details">
@@ -99,6 +101,7 @@
 
                                 <%})%>
                                     <%})%>
+
                 </div>
                 <div id="main-post-text-unclamp" class="main-post-text" data-id=<%=post._id%>>
                     <p>
@@ -228,7 +231,7 @@
 
 
     <!-- <script type="module" src="/js/relatedcontent.js"></script> -->
-    <script type="module" src="/js/viewjs.js"></script>
+    <script src="/js/viewjs.js"></script>
     <script src="/js/likes-and-unlike.js"></script>
     <script src="/js/comments.js"></script>
 

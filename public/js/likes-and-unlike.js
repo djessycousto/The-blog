@@ -6,11 +6,6 @@ const currentUrl = window.location.href;
 
 // Extract the path from the URL
 const pathSegments = new URL(currentUrl).pathname.split("/");
-
-// Find the indices of 'insight-article' and extract the two IDs
-const index = pathSegments.indexOf("article");
-// const postId = pathSegments[index + 1];
-// const userId = pathSegments[index + 2];
 const userId = document.getElementById("block-post").dataset.userid;
 
 // Get the postId from the dataset
