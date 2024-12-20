@@ -4,8 +4,9 @@ const Post = require("../model/Post");
 const view = async (req, res) => {
   try {
     const postId = req.params.postId;
-    console.log(postId);
     const userId = req.user.userId;
+    console.log(userId, "userid in controller");
+    console.log(postId, "postid in controller");
 
     const viewAlreadyExist = await View.findOne({ postId, userId });
 
@@ -33,7 +34,7 @@ const view = async (req, res) => {
 
 const getAllviews = async (req, res) => {
   try {
-    const { postId, userId } = req.params;
+    const { postId } = req.params;
 
     // Check if the user has already viewed the post
     const view = await View.find({ postId }); // get buy post

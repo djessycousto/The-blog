@@ -42,13 +42,8 @@ const like = async (req, res) => {
     const postId = req.params.postId; // The ID of the post being liked
     const userId = req.user.userId; // The ID of the currently logged-in user
 
-    console.log(postId, "server");
-    console.log(userId, "server");
-
     // Step 1: Check if the user has already liked this specific post
     const existingLike = await Like.findOne({ postId, userId });
-
-    console.log(existingLike);
 
     if (!existingLike) {
       // Step 2: If not, create a new like entry in the Like collection
@@ -61,7 +56,7 @@ const like = async (req, res) => {
         { new: true }
       );
 
-      console.log(like);
+      // console.log(like);
       // Step 4: Respond with the like object (you can also return the updated post if needed)
       res.json({ like });
     } else {

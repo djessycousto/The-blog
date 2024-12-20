@@ -1,14 +1,11 @@
-// Get the current URL
-const currentUrl = window.location.href;
-
-// Extract the path from the URL
-const pathSegments = new URL(currentUrl).pathname.split("/");
-
-// Find the indices of 'insight-article' and extract the two IDs
-const index = pathSegments.indexOf("article");
-const postId = pathSegments[index + 1];
-const userId = pathSegments[index + 2];
 // Log the extracted IDs
+// const test = document.getElementById("block-post");
+// const userId = document.getElementById("block-post").dataset;
+// console.log(userId, "from a view");
+// console.log(test, " test from a view");
+
+console.log(postId);
+// console.log(userId);
 
 async function view(postId, userId) {
   const baseURL = "http://localhost:8080"; // Replace with your actual server URL
