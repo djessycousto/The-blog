@@ -40,19 +40,21 @@ router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
     const { postId } = req.params;
     const userId = req.user.userId;
 
+    console.log(userId, "from router");
+
     const post = await Post.findById({ _id: postId })
       .populate("user")
       .populate("comments");
 
-    const user = await User.find({ userId });
+    const user = await User.findOne({ userId });
 
     if (!post) {
       // Handle the case where the post is not found
       console.error("Post not found");
       return res.status(404).send("Post not found");
     }
-
-    res.render("insight", { post, user });
+    console.log(user, "user from the router");
+    res.render("insight", { post, user, userId });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");

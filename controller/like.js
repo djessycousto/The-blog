@@ -1,42 +1,6 @@
 const Like = require("../model/Like");
 const Post = require("../model/Post");
 
-// const like = async (req, res) => {
-//   try {
-//     const postId = req.params.postId;
-//     const userId = req.user.userId;
-
-//     // Check if the user has already liked the post
-//     const existingLike = await Like.findOne({ postId, userId });
-
-//     console.log(existingLike, "existing like");
-
-//     if (!existingLike) {
-//       const like = await Like.create({ postId, userId });
-//       const post = await Post.findByIdAndUpdate(
-//         postId,
-//         { $push: { likes: like._id } }, // Add the like to the post
-//         { new: true }
-//       );
-
-//       // Add a new like record in the Like model
-//       //   const like = await Like.create({ postId, userId });
-
-//       res.json({ like }); // post.like??
-//     } else {
-//       console.log(existingLike, "existing like else");
-
-//       // User has already liked the post, handle accordingly
-//       res.json({ message: "User has already liked the post" });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: "Internal Server Error", error });
-//   }
-// };
-
-////////////////////////////
-
 const like = async (req, res) => {
   try {
     const postId = req.params.postId; // The ID of the post being liked
@@ -78,7 +42,6 @@ const getLike = async (req, res) => {
     const postId = req.params.postId;
     const like = await Like.find({ postId });
 
-    console.log(like, "from get like");
     res.status(200).json({ LikeNum: like.length, like });
   } catch (error) {
     console.error(error);

@@ -1,78 +1,91 @@
-const likespanbtn = document.querySelector(".likes");
-const getPostId = document.querySelector(".main-post-text").dataset.id;
-const likespan = document.querySelector(".likespan");
-console.log(getPostId);
-const currentUrl = window.location.href;
+const likesAndUnlike = () => {
+  const likespanbtn = document.querySelector(".likes");
+  const mainPostText = document.querySelector(".main-post-text");
+  const likespan = document.querySelector(".likespan");
+  const blockPost = document.getElementById("block-post");
 
-// Extract the path from the URL
-const pathSegments = new URL(currentUrl).pathname.split("/");
-const userId = document.getElementById("block-post").dataset.userid;
+  if (!likespanbtn || !mainPostText || !likespan || !blockPost) {
+    console.error("Required DOM elements not found");
+    throw new Error("Initialization failed: Missing DOM elements");
+  }
 
-// Get the postId from the dataset
-const postId = getPostId;
+  const getPostId = mainPostText.dataset.id;
+  console.log(getPostId, "getPostid from like js");
+  const userId = blockPost.dataset.userid;
+  console.log(userId, "userid ffrom like js");
 
-const baseURL = "http://localhost:8080"; // Replace with your actual server URL
+  const baseURL = "http://localhost:8080"; // Replace with your actual server URL
 
-// fetch all posts
+  // Fetch all posts
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch(`${baseURL}/posts`);
 
-const fetchPosts = async () => {
-  try {
-    const response = await fetch(`/posts`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts");
+      }
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch posts ", Error);
+      const data = await response.json();
+      const allPost = data.posts;
+
+      const postsLikes = allPost.map((post) => post.likes.length);
+      const totalLikes = postsLikes.reduce(
+        (acc, likesCount) => acc + likesCount,
+        0
+      );
+      likespan.textContent = `${totalLikes}`;
+    } catch (error) {
+      console.error("Error fetching posts:", error);
     }
+  };
 
-    const data = await response.json();
+  fetchPosts();
 
-    const allPost = data.posts;
+  likespanbtn.addEventListener("click", async (e) => {
+    e.preventDefault();
 
-    let postsLikes = allPost.map((post) => {
-      return post.likes.length;
-    });
-    likespan.textContent = `${
-      postsLikes.reduce((acc, likesCount) => acc + likesCount, 0) === 0
-        ? 0
-        : postsLikes.reduce((acc, likesCount) => acc + likesCount, 0)
-    }`;
-  } catch (error) {
-    console.log(error);
-  }
+    try {
+      // Fetch existing likes for the post
+      const likeResponse = await fetch(`${baseURL}/posts/${getPostId}/likes`);
+      if (!likeResponse.ok) throw new Error("Failed to fetch likes");
+
+      const { LikeNum, like } = await likeResponse.json();
+      console.log("Likes array:", like);
+
+      // Check if the user has already liked the post
+      const userHasLiked =
+        Array.isArray(like) &&
+        like.some(
+          (like) => like.userId === userId && like.postId === getPostId
+        );
+      console.log("User has liked:", userHasLiked);
+
+      // Determine the correct endpoint
+      const endpoint = userHasLiked ? "unlikes" : "likes";
+      console.log("Endpoint URL:", `${baseURL}/posts/${getPostId}/${endpoint}`);
+
+      // Send the like/unlike request
+      const response = await fetch(
+        `${baseURL}/posts/${getPostId}/${endpoint}`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Failed to update like status: ${errorText}`);
+      }
+
+      console.log(
+        userHasLiked ? "User unliked this post" : "User liked this post",
+        await response.json()
+      );
+
+      // Update the like count dynamically without reloading
+      await fetchPosts();
+    } catch (error) {
+      console.error("Error handling like button:", error);
+    }
+  });
 };
-
-fetchPosts();
-
-likespanbtn.addEventListener("click", async (e) => {
-  e.preventDefault();
-
-  try {
-    // Check if the user already liked the post
-    const likeResponse = await fetch(`${baseURL}/posts/${postId}/likes`);
-    if (!likeResponse.ok) throw new Error("Failed to fetch likes");
-
-    const { LikeNum, like } = await likeResponse.json();
-    // const userHasLiked = LikeNum > 0;
-    const userHasLiked = like.some(
-      (like) => like.userId === userId && like.postId === postId
-    );
-    // Send like or unlike based on current state
-    const endpoint = userHasLiked ? "unlikes" : "likes";
-    const response = await fetch(`${baseURL}/posts/${postId}/${endpoint}`, {
-      method: "POST",
-    });
-
-    if (!response.ok) throw new Error("Failed to update like status");
-
-    const data = await response.json();
-    console.log(
-      userHasLiked ? "User unliked this post" : "User liked this post",
-      data
-    );
-
-    // Update the like count dynamically without reloading
-    // await fetchLikeDisplay();
-    await fetchPosts();
-  } catch (error) {
-    console.error("Error handling like button:", error);
-  }
-});

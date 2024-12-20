@@ -49,7 +49,8 @@
                     <!-- <i class="fa-solid fa-user"></i> -->
 
 
-                    <div class="main-post-banner-details" id="block-post" data-userid="<%=post.user._id%>">
+                    <div class="main-post-banner-details" id="block-post" data-userid="<%=userId%>">
+                        <!-- <div class="main-post-banner-details" id="block-post" data-userid="<%=post.user._id%>"> -->
                         <h4>
 
 
@@ -105,7 +106,11 @@
                 </div>
                 <div id="main-post-text-unclamp" class="main-post-text" data-id=<%=post._id%>>
                     <p>
-                        <%= post.post%>
+
+                        <%console.log(userId, "from article user id" )%>
+
+                            <%= post.post%>
+
                     </p>
                 </div>
 
@@ -206,7 +211,7 @@
 
 
 
-                        <div class="message"> </div>
+                        <div class="message"> error:</div>
 
 
 

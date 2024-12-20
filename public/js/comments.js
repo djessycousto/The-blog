@@ -1,70 +1,59 @@
-// Get the current URL
+const commentFunction = () => {
+  // Get the current URL
 
-// Log the extracted IDs
+  // Log the extracted IDs
 
-function comment(postId, userId) {
-  const commentForm = document.getElementById("commentForm");
-  const commentsContent = document.getElementById("comments");
-  const commentBtn = document.getElementById("cbtn");
-  console.log(commentBtn, commentsContent);
+  function comment(postId, userId) {
+    const commentForm = document.getElementById("commentForm");
+    const commentsContent = document.getElementById("comments");
+    const commentBtn = document.getElementById("cbtn");
+    const messageDiv = document.querySelector(".message");
 
-  //
-  console.log(commentForm);
-  console.log(commentBtn);
-  commentBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
+    //
 
-    // check email
-    if (!commentsContent.value) {
-      message([commentsContent], "error-message", "field is required");
-      return;
-    }
+    commentBtn.addEventListener("click", async (e) => {
+      e.preventDefault();
 
-    const commentsFormData = new FormData();
-    commentsFormData.append("content", commentsContent.value);
+      // check email
+      if (!commentsContent.value) {
+        messageDiv.style.color = "red";
+        messageDiv.textContent = "Please don't send an empty field";
 
-    // fetch
+        setInterval(() => {
+          messageDiv.textContent = "";
+        }, 4000);
 
-    const newsletterResponse = await fetch(
-      `
-      /posts/${postId}/comment`,
-      {
-        method: "POST",
-        body: commentsFormData,
+        return;
       }
-    );
 
-    if (!newsletterResponse.ok) {
-      console.log("error when saving newsletter");
-      return message(
-        [email],
-        "error-message",
-        "internal server issue please try later"
+      const commentsFormData = new FormData();
+      commentsFormData.append("content", commentsContent.value);
+
+      // fetch
+
+      const newsletterResponse = await fetch(
+        `
+      /posts/${postId}/comment`,
+        {
+          method: "POST",
+          body: commentsFormData,
+        }
       );
-    }
 
-    const newsletterData = await newsletterResponse.json();
-  }); // end click
-}
+      if (!newsletterResponse.ok) {
+        console.log("error when saving newsletter");
+        return message(
+          [email],
+          "error-message",
+          "internal server issue please try later"
+        );
+      }
 
-// function message(input, Addclass, msg) {
-//   const messageDiv = document.querySelector(".message");
+      const newsletterData = await newsletterResponse.json();
+    }); // end click
+  }
 
-//   input.style.border = "1px solid red";
+  comment(postId);
+};
 
-//   messageDiv.classList.add(Addclass);
-//   messageDiv.textContent = msg;
-
-//   setTimeout(() => {
-//     inputBorders.forEach((input) => {
-//       input.style.border = "";
-//     });
-
-//     messageDiv.classList.remove(Addclass);
-//     messageDiv.textContent = "";
-//   }, 5000);
-// }
-// comment(postId, userId);
-console.log("comment");
-
-comment(postId);
+// commentFunction();
