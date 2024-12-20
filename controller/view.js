@@ -5,7 +5,7 @@ const view = async (req, res) => {
   try {
     const postId = req.params.postId;
     const userId = req.user.userId;
-    // console.log(userId, "userid in controller");
+    console.log(userId, "userid in controller view");
     // console.log(postId, "postid in controller");
 
     const viewAlreadyExist = await View.findOne({ postId, userId });
