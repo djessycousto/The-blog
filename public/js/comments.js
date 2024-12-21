@@ -51,6 +51,7 @@ const commentFunction = () => {
       }
 
       const newsletterData = await newsletterResponse.json();
+      window.location.reload();
     }); // end click
   }
 

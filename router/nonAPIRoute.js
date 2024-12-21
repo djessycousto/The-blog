@@ -40,11 +40,17 @@ router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
     const { postId } = req.params;
     const userId = req.user.userId;
 
-    console.log(userId, "from router");
-
     const post = await Post.findById({ _id: postId })
       .populate("user")
-      .populate("comments");
+      .populate("comments") // Populate comments
+      .populate({
+        path: "comments",
+        populate: {
+          path: "commentAuthor",
+          select: "name", // Only return the name field
+        },
+      })
+      .exec();
 
     // const user = await User.findOne({ userId });
     const user = await User.findById(userId);

@@ -3,7 +3,6 @@ const Post = require("../model/Post");
 
 const newComment = async (req, res) => {
   const postId = req.params.postId;
-  console.log(postId, "POST ID");
   try {
     const { content, parentCommentId } = req.body;
 

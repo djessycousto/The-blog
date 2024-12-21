@@ -32,13 +32,39 @@ const allPosts = async (req, res) => {
       .select("-password")
       .populate("user") // Populate user details
       .populate("likes", "userId timestamp") // Populate likes details
+      .populate("comments") // Populate comments
       .populate({
-        path: "comments", // Populate the comments
+        path: "comments",
         populate: {
-          path: "commentAuthor", // Populate the userId field in comments (who authored the comment)
-          select: "content", // Specify which user fields to return
+          path: "commentAuthor",
+          select: "name", // Only return the name field
         },
-      });
+      })
+      .exec();
+
+    // console.log(JSON.stringify(posts, null, 2, "striingyfy")); // View the expanded output
+
+    //   .populate("comments") // Populate comments first
+    //   .populate({
+    //     path: "comments",
+    //     populate: {
+    //       path: "commentAuthor",
+    //       select: "name",
+    //     },
+    //   });
+    // .exec();
+
+    console.log(posts, "from posts controller");
+
+    // .populate({
+    //   path: "comments", // Access the comments array
+    //   populate: {
+    //     path: "commentAuthor", // Populate commentAuthor within comments
+    //     select: "name", // Fetch only the 'name' field
+    //   },
+    // });
+    // mongoose.set("debug", true);
+
     // Populate likes details
     // console.log(posts, " from post");
     res.status(200).json({ Qt: posts.length, posts });
