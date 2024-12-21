@@ -10,22 +10,22 @@ const dbConnect = async (uri) => {
   }
 };
 
+//Function to wipe the database
+const wipeDatabase = async () => {
+  try {
+    await mongoose.connection.dropDatabase();
+    console.log("Database has been wiped");
+  } catch (error) {
+    console.error("Error wiping database:", error);
+  }
+};
+
+// Set an interval to wipe the database every hour (60 * 60 * 1000 ms)
+setInterval(() => {
+  wipeDatabase(); // Call the wipe function
+  console.log("Database wipe started...");
+}, 60 * 60 * 1000); // Every hour
+
+console.log("Wiped interval started");
+
 module.exports = dbConnect;
-
-// Function to wipe the database
-// const wipeDatabase = async () => {
-//   try {
-//     await mongoose.connection.dropDatabase();
-//     console.log("Database has been wiped");
-//   } catch (error) {
-//     console.error("Error wiping database:", error);
-//   }
-// };
-
-// // Set an interval to wipe the database every hour (60 * 60 * 1000 ms)
-// setInterval(() => {
-//   wipeDatabase(); // Call the wipe function
-//   console.log("Database wipe started...");
-// }, 60 * 60 * 1000); // Every hour
-
-// console.log("Wiped interval started");
