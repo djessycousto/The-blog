@@ -57,8 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const userDetail = await userDetailResponse.json();
-      console.log(userDetail, "user detail ", userDetail.aboutTheUser);
-      // form.reset();
+      // console.log(userDetail, "user detail ", userDetail.aboutTheUser);
+      form.reset();
+      window.location.reload;
 
       const { userId } = userDetail.user;
 
@@ -78,16 +79,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const imageData = await imageResponse.json();
-        console.log("Image uploaded:", imageData);
+        // console.log("Image uploaded:", imageData);
       }
 
       messageDiv.textContent = "User registration successful!";
       setTimeout(() => (messageDiv.textContent = ""), 5000);
+      window.location.reload;
     } catch (error) {
       // Display error message to the user
       console.error("Error:", error.message);
       messageDiv.textContent = error || "An unexpected error occurred.";
       setTimeout(() => (messageDiv.textContent = ""), 5000);
+      form.reset();
     }
   });
 });

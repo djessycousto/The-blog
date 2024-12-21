@@ -3,6 +3,42 @@ const domContent = document.querySelector(".main-post-contents");
 const searchForm = document.querySelector("#search-form");
 const searchFormInput = document.querySelector("#search-form input");
 
+// async function searchBlog() {
+//   mainDomContainer.innerHTML = `<h4>Loading...</h4>`;
+
+//   try {
+//     const fetchAllPosts = await fetch("/posts");
+//     if (!fetchAllPosts.ok) throw new Error("Failed to fetch posts");
+//     const result = await fetchAllPosts.json();
+
+//     const posts = await Promise.all(
+//       result.posts.map(async (post) => {
+//         try {
+//           const populatePost = await fetch(`/users/${post.user}`);
+//           if (!populatePost.ok) throw new Error("Failed to fetch user data");
+//           const userData = await populatePost.json();
+
+//           return {
+//             ...post,
+//             user: userData,
+//           };
+//         } catch (error) {
+//           console.error(
+//             `Error fetching user data for post ${post._id}:`,
+//             error
+//           );
+//           return null; // Optionally filter out this post
+//         }
+//       })
+//     );
+
+//     return posts.filter((post) => post !== null); // Filter out failed posts
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//     return []; // Return an empty array on error
+//   }
+// }
+
 async function searchBlog() {
   mainDomContainer.innerHTML = `<h4>Loading...</h4>`;
 
@@ -14,7 +50,12 @@ async function searchBlog() {
     const posts = await Promise.all(
       result.posts.map(async (post) => {
         try {
-          const populatePost = await fetch(`/users/${post.user}`);
+          // Ensure post.user is an ObjectId string, not an object
+          const userId = post.user && post.user._id ? post.user._id : post.user;
+
+          if (!userId) throw new Error("User ID not available");
+
+          const populatePost = await fetch(`/users/${userId}`);
           if (!populatePost.ok) throw new Error("Failed to fetch user data");
           const userData = await populatePost.json();
 

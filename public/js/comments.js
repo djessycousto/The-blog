@@ -3,7 +3,6 @@ const commentFunction = () => {
 
   // Log the extracted IDs
   const postId = document.querySelector(".main-post-text").dataset.id;
-  console.log(postId, "from comment post id");
   function comment(postId) {
     const commentForm = document.getElementById("commentForm");
     const commentsContent = document.getElementById("comments");

@@ -155,6 +155,7 @@ const handleFormSubmit = async (e) => {
   } else {
     // Use the existing image path
     updateData.postPicture = currentPostPicture;
+    window.location.reload();
   }
 
   // Send update request

@@ -60,7 +60,6 @@ router.get("/article/:postId/:userId", authenticateUser, async (req, res) => {
       console.error("Post not found");
       return res.status(404).send("Post not found");
     }
-    console.log(user, "user from the router");
     res.render("insight", { post, user, userId });
   } catch (error) {
     console.error(error);

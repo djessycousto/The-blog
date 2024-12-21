@@ -42,29 +42,6 @@ const allPosts = async (req, res) => {
       })
       .exec();
 
-    // console.log(JSON.stringify(posts, null, 2, "striingyfy")); // View the expanded output
-
-    //   .populate("comments") // Populate comments first
-    //   .populate({
-    //     path: "comments",
-    //     populate: {
-    //       path: "commentAuthor",
-    //       select: "name",
-    //     },
-    //   });
-    // .exec();
-
-    console.log(posts, "from posts controller");
-
-    // .populate({
-    //   path: "comments", // Access the comments array
-    //   populate: {
-    //     path: "commentAuthor", // Populate commentAuthor within comments
-    //     select: "name", // Fetch only the 'name' field
-    //   },
-    // });
-    // mongoose.set("debug", true);
-
     // Populate likes details
     // console.log(posts, " from post");
     res.status(200).json({ Qt: posts.length, posts });

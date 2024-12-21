@@ -1,3 +1,5 @@
+const { format } = require("morgan");
+
 ///############## ADD post  ########################
 const addPostBtn = document.getElementById("addForm");
 document.addEventListener("DOMContentLoaded", () => {
@@ -68,8 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const addpostData = await addPostResponse.json();
+      window.location.reload();
 
-      console.log(addpostData, "image saved");
+      // console.log(addpostData, "image saved");
 
       // remain data
 
@@ -89,7 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       addPost = await addPostRes.json();
-      console.log(addPost);
+      window.location.reload();
+      // console.log(addPost);
 
       // setTimeout(() => {
       //   window.location.reload();

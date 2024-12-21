@@ -120,7 +120,9 @@
                     <div class="likes-view-comments-number">
                         <i class="fa-solid fa-eye"><span class="viewnum"> 0 </span></i>
                         <!-- <span>views: 0</span> -->
-                        <a href=""> <i class="fa-solid fa-comment"> <span class="commentspan"> 0</span> </i></a>
+                        <a href=""> <i class="fa-solid fa-comment"> <span class="commentspan">
+                                    <%=post.comments.length%>
+                                </span> </i></a>
                         <!-- <a href="#" class="comment">comments: 0</a> -->
                         <a href="#" class="likes"><i class="fa-solid fa-thumbs-up"><span class="likespan">
                                     0</span></i></a>
@@ -184,6 +186,7 @@
 
 
 
+
     <!--  comments -->
     <section class="comments">
         <h5>
@@ -200,37 +203,37 @@
 
         <%post.comments.forEach((comment)=>{%>
 
-            <%=console.log(comment, "comment" )%>
 
 
-                <div class="output-comments">
-                    <p>
-                    <div><small>
-                            <p>
-                                <%= comment.commentAuthor.name %>
-                            </p>
 
-                        </small> </div>
-                    <%= comment.content%>
-
+            <div class="output-comments">
+                <p>
+                <div><small>
+                        <p>
+                            <%= comment.commentAuthor.name %>
                         </p>
+
+                    </small> </div>
+                <%= comment.content%>
+
+                    </p>
+            </div>
+            <%}) %>
+
+
+
+
+                <div class="comments-inputs">
+                    <form id="commentForm">
+
+
+
+                        <div class="message"></div>
+                        <textarea id="comments" placeholder="Your thought" name=" comments"></textarea>
+                        <!-- <input type="text-a" placeholder="Your thought"> -->
+                        <button id="cbtn" type="submit">send</button>
+                    </form>
                 </div>
-                <%}) %>
-
-
-
-
-                    <div class="comments-inputs">
-                        <form id="commentForm">
-
-
-
-                            <div class="message"> error:</div>
-                            <textarea id="comments" placeholder="Your thought" name=" comments"></textarea>
-                            <!-- <input type="text-a" placeholder="Your thought"> -->
-                            <button id="cbtn" type="submit">send</button>
-                        </form>
-                    </div>
 
     </section>
 

@@ -27,23 +27,39 @@
                 <form id="search-form">
                     <input type="search" placeholder="search...">
                 </form>
-                <div class="filter-1">
-                    <h3>FILTER BY TOPIC</h3>
-                    <!-- <button><span>Latest</span></button>
-                    <button><span>Latest</span></button>
-                    <button><span>Latest</span></button> -->
 
-                </div>
 
 
 
                 <div class="filter-1">
                     <h3>FILTER BY TOPIC</h3>
-                    <span>Latest</span>
-                    <span> Accessibility </span>
-                    <span>Brand Development </span>
-                    <span> Content </span>
+
+                    <% posts.forEach((post)=> { %> <!-- Loop through all posts -->
+
+                        <!-- Display Author Name -->
+                        <span>Author Name: <%= post.user.name %></span>
+
+                        <!-- Display Categories -->
+                        <span>
+                            Category:
+                            <% post.category.forEach((cat)=> { %>
+                                <% const categories=cat.split(","); %>
+                                    <% categories.forEach((category)=> { %>
+                                        <%= category %>
+                                            <% }); %>
+                                                <% }); %>
+                        </span>
+
+                        <!-- Display Title -->
+                        <span>Title: <%= post.title %></span>
+
+                        <!-- Display Content (trimmed to avoid large text) -->
+
+                        <hr> <!-- Separate each post's filter section -->
+
+                        <% }); %> <!-- End loop for posts -->
                 </div>
+
 
                 <!-- news letter -->
                 <div class="newsletter-container">

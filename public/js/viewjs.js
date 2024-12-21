@@ -50,7 +50,7 @@ const viewFunc = () => {
       );
 
       if (userHasViewed) {
-        console.log("Post already viewed by user");
+        // console.log("Post already viewed by user");
         return; // Exit early if already viewed
       } else {
         // Make the POST request to record the view
