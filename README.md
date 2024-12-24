@@ -1,0 +1,3 @@
+It is creazy what they say, " if you can dream it, you can do it".
+NodeJS was not easy, but with a big will the first node complex project was created. from here i will do my best to create more
+Thank you to ChatGPT, greatteacher...
