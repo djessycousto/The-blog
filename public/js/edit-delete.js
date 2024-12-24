@@ -76,10 +76,13 @@ const addEditListeners = () => {
 
       if (e.target.classList.contains("edit-btn")) {
         isEditMode = true; // We're now in edit mode
+        const addFormTitle = document.querySelector(".addpostform .form-title");
 
         // Switch to the edit form
         pages.forEach((page) => page.classList.remove("active"));
         addFormDisplay.style.display = "none";
+        addFormTitle.style.display = "none";
+
         editFormDisplay.style.display = "block";
         document.getElementById("add-content").classList.add("active");
       }
